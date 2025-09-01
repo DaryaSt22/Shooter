@@ -29,13 +29,13 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP and rect_y >= step:
                 rect_y = rect_y - step
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN and rect_y <= screen_height - rect_height - step:
                 rect_y = rect_y + step
-            if event.key == pygame.K_LEFT:
+            if event.key == pygame.K_LEFT and rect_x >= step:
                 rect_x = rect_x - step
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT and rect_x <= screen_width - rect_width - step:
                 rect_x = rect_x + step
 
     # screen.fill(pygame.Color('blue'))
