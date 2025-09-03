@@ -15,9 +15,10 @@ fighter_width, fighter_height = fighter_image.get_size()
 fighter_x, fighter_y = screen_width / 2 - fighter_width / 2, screen_height - fighter_height
 fighter_is_moving_left, fighter_is_moving_right = False, False
 
+ROCKET_STEP = 0.3
 rocket_image = pygame.image.load('images/rocket.png')
 rocket_width, rocket_height = rocket_image.get_size()
-rocket_x, rocket_y = fighter_x + fighter_width / 2 - rocket_width / 2, fighter_y - rocket_height
+rocket_x, rocket_y = 0, 0
 rocked_was_fired = False
 
 while True:
@@ -31,6 +32,8 @@ while True:
                 fighter_is_moving_right = True
             if event.key == pygame.K_SPACE:
                 rocked_was_fired = True
+                rocket_x = fighter_x + fighter_width / 2 - rocket_width / 2
+                rocket_y = fighter_y - rocket_height
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 fighter_is_moving_left = False
@@ -41,6 +44,12 @@ while True:
         fighter_x -= FIGHTER_STEP
     if fighter_is_moving_right and fighter_x <= screen_width - fighter_width - FIGHTER_STEP:
         fighter_x += FIGHTER_STEP
+
+    if rocked_was_fired and rocket_y + rocket_height < 0:
+        rocked_was_fired = False
+
+    if rocked_was_fired:
+        rocket_y -= ROCKET_STEP
 
     screen.fill(screen_fill_color)
     screen.blit(fighter_image, (fighter_x, fighter_y))
