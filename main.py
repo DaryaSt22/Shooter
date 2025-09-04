@@ -18,7 +18,7 @@ fighter_width, fighter_height = fighter_image.get_size()
 fighter_x, fighter_y = screen_width / 2 - fighter_width / 2, screen_height - fighter_height
 fighter_is_moving_left, fighter_is_moving_right = False, False
 
-ROCKET_STEP = 0.3
+ROCKET_STEP = 0.4
 rocket_image = pygame.image.load('images/rocket.png')
 rocket_width, rocket_height = rocket_image.get_size()
 rocket_x, rocket_y = 0, 0
@@ -31,6 +31,8 @@ alien_width, alien_height = alien_image.get_size()
 alien_x, alien_y = randint(0, screen_width - alien_width), 0
 
 game_is_running = True
+
+game_score = 0
 
 while game_is_running:
     for event in pygame.event.get():
@@ -72,6 +74,9 @@ while game_is_running:
     if rocked_was_fired:
         screen.blit(rocket_image, (rocket_x, rocket_y))
 
+    game_score_text = game_font.render(f"Your Score is: {game_score}", True, 'red')
+    screen.blit(game_score_text, (20, 20))
+
     pygame.display.update()
 
     if alien_y + alien_height > fighter_y:
@@ -83,8 +88,7 @@ while game_is_running:
         rocked_was_fired = False
         alien_x, alien_y = randint(0, screen_width - alien_width), 0
         alien_speed += ALIEN_STEP / 2
-
-
+        game_score += 1
 
 game_over_text = game_font.render("Game Over!", True, 'red')
 game_over_rectangle = game_over_text.get_rect()
