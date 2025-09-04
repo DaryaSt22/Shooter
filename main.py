@@ -1,5 +1,6 @@
 import pygame
 import sys
+from random import randint
 
 pygame.init()
 
@@ -20,6 +21,11 @@ rocket_image = pygame.image.load('images/rocket.png')
 rocket_width, rocket_height = rocket_image.get_size()
 rocket_x, rocket_y = 0, 0
 rocked_was_fired = False
+
+ALIEN_STEP = 0.1
+alien_image = pygame.image.load('images/alien.png')
+alien_width, alien_height = alien_image.get_size()
+alien_x, alien_y = randint(0, screen_width - alien_width), 0
 
 while True:
     for event in pygame.event.get():
@@ -42,8 +48,11 @@ while True:
 
     if fighter_is_moving_left and fighter_x >= FIGHTER_STEP:
         fighter_x -= FIGHTER_STEP
+
     if fighter_is_moving_right and fighter_x <= screen_width - fighter_width - FIGHTER_STEP:
         fighter_x += FIGHTER_STEP
+
+    alien_y += ALIEN_STEP
 
     if rocked_was_fired and rocket_y + rocket_height < 0:
         rocked_was_fired = False
@@ -53,6 +62,7 @@ while True:
 
     screen.fill(screen_fill_color)
     screen.blit(fighter_image, (fighter_x, fighter_y))
+    screen.blit(alien_image, (alien_x, alien_y))
 
     if rocked_was_fired:
         screen.blit(rocket_image, (rocket_x, rocket_y))
