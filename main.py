@@ -1,6 +1,7 @@
-import pygame
 import sys
 from random import randint
+
+import pygame
 
 pygame.init()
 
