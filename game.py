@@ -57,4 +57,4 @@ class Game:
 
         if self.alien.has_reached_fighter(self.fighter):
             self.game_is_running = False
-
+print()
