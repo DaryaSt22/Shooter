@@ -9,9 +9,9 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_FILL_COLOR, GAME_CAPTI
 class Game:
     def __init__(self):
         pygame.display.set_caption(GAME_CAPTIONS)
-        self.screen_width, self.Screen_height = SCREEN_WIDTH, SCREEN_HEIGHT
+        self.screen_width, self.screen_height = SCREEN_WIDTH, SCREEN_HEIGHT
         self.screen_fill_color = SCREEN_FILL_COLOR
-        self.screen = pygame.display.set_mode(self.screen_width, self.screen_height)
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.game_font = pygame.font.Font(None, 30)
         self.game_score = 0
 
